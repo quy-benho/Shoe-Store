@@ -1,1 +1,1 @@
-package utc.laptrinhweb.QLBH.model;public class Color {}
+package utc.laptrinhweb.QLBH.model;import lombok.Data;import javax.persistence.Column;import javax.persistence.Entity;import javax.persistence.Id;@Entity(name = "MAUSAC")@Datapublic class Color {    @Id    @Column(name = "MA_")    private String id;    @Column(name = "TEN")    private String name;    @Column(name = "HEX_CODE")    private String colorValue;    @Column(name = "NGAY_TAO")    private String createAt;    @Column(name = "TRANG_THAI")    private int state;}

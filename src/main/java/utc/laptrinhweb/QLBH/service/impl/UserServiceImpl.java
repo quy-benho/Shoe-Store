@@ -1,0 +1,1 @@
+package utc.laptrinhweb.QLBH.service.impl;import utc.laptrinhweb.QLBH.service.UserService;public class UserServiceImpl implements UserService {}

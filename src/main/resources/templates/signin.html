@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head.html::head">
-
-    
 </head>
 
 <body>
+<form class="form-signin" method="POST" th:action="@{/signin}">
+
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -27,14 +28,18 @@
                             </a>
                             <h3>Sign In</h3>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
+
+                        <p>
+                            <label for="username" class="sr-only">Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   placeholder="Username" required autofocus>
+                        </p>
+                        <p>
+                            <label for="password" class="sr-only">Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Password" required>
+                        </p>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -42,7 +47,9 @@
                             </div>
                             <a href="">Forgot Password</a>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                        <button onclick="document.forms['signin'].submit()" type="submit"
+                                class="btn btn-primary py-3 w-100 mb-4">Sign In
+                        </button>
                         <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
                     </div>
                 </div>
@@ -50,7 +57,10 @@
         </div>
         <!-- Sign In End -->
     </div>
+
     <head th:replace="fragments/footer.html::footer">
+</form>
+
 
 </body>
 

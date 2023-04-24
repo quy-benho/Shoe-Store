@@ -1,1 +1,0 @@
-package utc.laptrinhweb.QLBH.model;import lombok.Data;import javax.persistence.Column;import javax.persistence.Entity;import javax.persistence.Id;import java.util.Date;@Data@Entitypublic class Size {    @Id    @Column(name = "id")    private String id;    private String name;    private String code;    private Date createAt;    private int state;}

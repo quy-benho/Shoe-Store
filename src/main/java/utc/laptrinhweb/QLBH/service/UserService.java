@@ -1,1 +1,0 @@
-package utc.laptrinhweb.QLBH.service;public interface UserService {}

@@ -50,6 +50,8 @@ public class CategoryServiceImpl implements CategoryService {
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
+
+
     @Override
     public String updateGoodsCategory(GoodsCategory goodsCategory) {
         GoodsCategory temp = goodsCategoryMapper.selectByPrimaryKey(goodsCategory.getCategoryId());

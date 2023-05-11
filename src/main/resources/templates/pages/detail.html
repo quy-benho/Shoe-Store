@@ -19,12 +19,12 @@
     <div class="intro mt20 w clearfix">
         <div class="left fl" style="position: relative;">
             <div class="swiper-container fl">
-                <img th:src="@{${goodsDetail.goodsCoverImg}}">
+                <img th:src="@{${productDetail.goodsCoverImg}}">
             </div>
         </div>
         <div class="right fr">
-            <div class="h3 p10 mt20" th:text="${goodsDetail.goodsName}">Thu Dang Store</div>
-            <div class="sub_title mr40 ml20 mt10" th:text="${goodsDetail.goodsIntro}">Thu Dang Store</div>
+            <div class="h3 p10 mt20" th:text="${productDetail.goodsName}">Thu Dang Store</div>
+            <div class="sub_title mr40 ml20 mt10" th:text="${productDetail.goodsIntro}">Thu Dang Store</div>
             <h4>Chọn màu:</h4>
             <select class="form-control col-sm-4 custom-select"
                     id="selectColor"
@@ -39,24 +39,24 @@
             </select>
             <h4>Chọn số lượng:</h4>
             <input id="selectQuantity" name="selectQuantity" type="number" class="form-control col-sm-4 custom-select" value="1" step="1" min="1" max="5" />
-            <div th:if="${goodsDetail.sellingPrice} < ${goodsDetail.originalPrice}" class="item_price mr40 ml20 mt10">
-                <th:block th:text="'Giá sale: ' + ${goodsDetail.formatPrice()}"></th:block>
+            <div th:if="${productDetail.sellingPrice} < ${productDetail.originalPrice}" class="item_price mr40 ml20 mt10">
+                <th:block th:text="'Giá sale: ' + ${productDetail.formatPrice()}"></th:block>
                 <del>
-                    <div th:text="'Giá goc: ' + ${goodsDetail.formatOriginalPrice()}"></div>
+                    <div th:text="'Giá goc: ' + ${productDetail.formatOriginalPrice()}"></div>
                 </del>
             </div>
-            <div th:if="${goodsDetail.sellingPrice} > ${goodsDetail.originalPrice}" class="item_price mr40 ml20 mt10">
-                <th:block th:text="'Giá bán: ' + ${goodsDetail.formatPrice()}"></th:block>
+            <div th:if="${productDetail.sellingPrice} > ${productDetail.originalPrice}" class="item_price mr40 ml20 mt10">
+                <th:block th:text="'Giá bán: ' + ${productDetail.formatPrice()}"></th:block>
             </div>
 
             <div class="order">
-                <input class="car" type="button" th:onclick="'saveToCart('+${goodsDetail.goodsId}+',true)'" value="Mua ngay"/>
-                <input class="car" type="button" th:onclick="'saveToCart('+${goodsDetail.goodsId}+',false)'" value="Thêm giỏ hàng"/>
+                <input class="car" type="button" th:onclick="'saveToCart('+${productDetail.goodsId}+',true)'" value="Mua ngay"/>
+                <input class="car" type="button" th:onclick="'saveToCart('+${productDetail.goodsId}+',false)'" value="Thêm giỏ hàng"/>
             </div>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="goods mt20 w clearfix" th:utext="${goodsDetail.goodsDetailContent}">
+    <div class="product mt20 w clearfix" th:utext="${productDetail.goodsDetailContent}">
     </div>
 </div>
 
@@ -68,12 +68,12 @@
 <script th:src="@{/Appdata/js/search.js}" type="text/javascript"></script>
 <script type="text/javascript">
 
-	const goodsId = [[${goodsDetail.goodsId}]];
+	const goodsId = [[${productDetail.goodsId}]];
 	let details = [];
 
 	$.ajax({
 	    type: 'POST',
-	    url: `/goods/detail/${goodsId}`,
+	    url: `/product/detail/${goodsId}`,
 	    contentType: 'application/json',
 	    success: function (result) {
 			if (result && result.length>0) {

@@ -1,9 +1,7 @@
 package com.adc.eshop.controller.admin;
 
 import com.adc.eshop.common.ServiceResultEnum;
-import com.adc.eshop.entity.GoodsCategory;
-import com.adc.eshop.entity.GoodsDetail;
-import com.adc.eshop.service.CategoryService;
+import com.adc.eshop.entity.ProductDetail;
 import com.adc.eshop.service.GoodsDetailService;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.Result;
@@ -42,14 +40,14 @@ public class GoodsDetailController {
 
     @RequestMapping(value = "/goodsDetail/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(@RequestBody GoodsDetail goodsDetail) {
-        if (Objects.isNull(goodsDetail.getGoodsColor())
-                || StringUtils.isEmpty(goodsDetail.getGoodsSize())
-                || Objects.isNull(goodsDetail.getGoodsQuantity())
-                || Objects.isNull(goodsDetail.getGoodsId())) {
+    public Result save(@RequestBody ProductDetail productDetail) {
+        if (Objects.isNull(productDetail.getGoodsColor())
+                || StringUtils.isEmpty(productDetail.getGoodsSize())
+                || Objects.isNull(productDetail.getGoodsQuantity())
+                || Objects.isNull(productDetail.getGoodsId())) {
             return ResultGenerator.genFailResult("Abnormal parameter！");
         }
-        String result = goodsDetailService.saveGoodsDetail(goodsDetail);
+        String result = goodsDetailService.saveGoodsDetail(productDetail);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -59,13 +57,13 @@ public class GoodsDetailController {
 
     @RequestMapping(value = "/goodsDetail/update", method = RequestMethod.POST)
     @ResponseBody
-    public Result update(@RequestBody GoodsDetail goodsDetail) {
-        if (StringUtils.isEmpty(goodsDetail.getGoodsColor())
-                || Objects.isNull(goodsDetail.getGoodsSize())
-                || Objects.isNull(goodsDetail.getGoodsQuantity())) {
+    public Result update(@RequestBody ProductDetail productDetail) {
+        if (StringUtils.isEmpty(productDetail.getGoodsColor())
+                || Objects.isNull(productDetail.getGoodsSize())
+                || Objects.isNull(productDetail.getGoodsQuantity())) {
             return ResultGenerator.genFailResult("Abnormal parameter！");
         }
-        String result = goodsDetailService.updateGoodsDetail(goodsDetail);
+        String result = goodsDetailService.updateGoodsDetail(productDetail);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {

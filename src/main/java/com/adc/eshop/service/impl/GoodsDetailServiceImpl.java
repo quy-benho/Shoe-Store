@@ -2,16 +2,13 @@ package com.adc.eshop.service.impl;
 
 import com.adc.eshop.common.ServiceResultEnum;
 import com.adc.eshop.dao.GoodsDetailMapper;
-import com.adc.eshop.entity.GoodsCategory;
-import com.adc.eshop.entity.GoodsDetail;
+import com.adc.eshop.entity.ProductDetail;
 import com.adc.eshop.service.GoodsDetailService;
-import com.adc.eshop.service.GoodsService;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,40 +19,40 @@ public class GoodsDetailServiceImpl implements GoodsDetailService {
 
     @Override
     public PageResult getGoodsDetailPage(PageQueryUtil pageUtil) {
-        List<GoodsDetail> goodsDetails = goodsDetailMapper.findGoodsDetailList(pageUtil);
+        List<ProductDetail> productDetails = goodsDetailMapper.findGoodsDetailList(pageUtil);
         int total = goodsDetailMapper.getTotalGoodsCategories(pageUtil);
-        PageResult pageResult = new PageResult(goodsDetails, total, pageUtil.getLimit(), pageUtil.getPage());
+        PageResult pageResult = new PageResult(productDetails, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
 
     @Override
-    public String saveGoodsDetail(GoodsDetail goodsDetail) {
-        goodsDetail.setIsDeleted((byte) 0);
-        if (goodsDetailMapper.insertSelective(goodsDetail) > 0) {
+    public String saveGoodsDetail(ProductDetail productDetail) {
+        productDetail.setIsDeleted((byte) 0);
+        if (goodsDetailMapper.insertSelective(productDetail) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
     @Override
-    public String updateGoodsDetail(GoodsDetail goodsDetail) {
-        GoodsDetail temp = goodsDetailMapper.selectByPrimaryKey(goodsDetail.getGoodsDeatailId());
+    public String updateGoodsDetail(ProductDetail productDetail) {
+        ProductDetail temp = goodsDetailMapper.selectByPrimaryKey(productDetail.getGoodsDeatailId());
         if (temp == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
-        if (goodsDetailMapper.updateByPrimaryKeySelective(goodsDetail) > 0) {
+        if (goodsDetailMapper.updateByPrimaryKeySelective(productDetail) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
     @Override
-    public GoodsDetail getGoodsDetailById(Long id) {
+    public ProductDetail getGoodsDetailById(Long id) {
         return null;
     }
 
     @Override
-    public List<GoodsDetail> selectGooDetail(List<Long> parentIds) {
+    public List<ProductDetail> selectGooDetail(List<Long> parentIds) {
         return null;
     }
 

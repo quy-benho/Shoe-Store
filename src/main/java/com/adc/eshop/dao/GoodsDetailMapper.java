@@ -1,6 +1,6 @@
 package com.adc.eshop.dao;
 
-import com.adc.eshop.entity.GoodsDetail;
+import com.adc.eshop.entity.ProductDetail;
 import com.adc.eshop.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,17 +9,17 @@ import java.util.List;
 public interface GoodsDetailMapper {
     int deleteByPrimaryKey(Long goodsDetailId);
 
-    int insert(GoodsDetail record);
+    int insert(ProductDetail record);
 
-    int insertSelective(GoodsDetail record);
+    int insertSelective(ProductDetail record);
 
-    GoodsDetail selectByPrimaryKey(Long goodsDetailId);
+    ProductDetail selectByPrimaryKey(Long goodsDetailId);
 
-    int updateByPrimaryKeySelective(GoodsDetail record);
+    int updateByPrimaryKeySelective(ProductDetail record);
 
-    int updateByPrimaryKey(GoodsDetail record);
+    int updateByPrimaryKey(ProductDetail record);
 
-    List<GoodsDetail> findGoodsDetailList(PageQueryUtil pageUtil);
+    List<ProductDetail> findGoodsDetailList(PageQueryUtil pageUtil);
 
     int getTotalGoodsCategories(PageQueryUtil pageUtil);
 

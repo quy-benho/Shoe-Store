@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adc.eshop.dao.GoodsDetailMapper">
-    <resultMap id="BaseResultMap" type="com.adc.eshop.entity.GoodsDetail">
+    <resultMap id="BaseResultMap" type="com.adc.eshop.entity.ProductDetail">
         <id column="goods_detail_id" jdbcType="BIGINT" property="goodsDeatailId"/>
         <result column="goods_color" jdbcType="VARCHAR" property="goodsColor"/>
         <result column="goods_size" jdbcType="INTEGER" property="goodsSize"/>
@@ -46,12 +46,12 @@
     where goods_detail_id = #{goodsDeatailId,jdbcType=BIGINT} and is_deleted=0
   </update>
 
-    <insert id="insert" parameterType="com.adc.eshop.entity.GoodsCategory">
+    <insert id="insert" parameterType="com.adc.eshop.entity.Category">
     insert into tb_goods_detail (goods_detail_id, goods_color, goods_size, goods_quantity, goods_id, is_deleted)
     values (#{goodsDeatailId,jdbcType=BIGINT}, #{goodsColor,jdbcType=VARCHAR}, #{goodsSize,jdbcType=INTEGER},
       #{goodsQuantity,jdbcType=INTEGER}, #{goodsId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}
   </insert>
-    <insert id="insertSelective" parameterType="com.adc.eshop.entity.GoodsDetail">
+    <insert id="insertSelective" parameterType="com.adc.eshop.entity.ProductDetail">
         insert into tb_goods_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsDeatailId != null">
@@ -97,7 +97,7 @@
 
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.adc.eshop.entity.GoodsDetail">
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.eshop.entity.ProductDetail">
         update tb_goods_detail
         <set>
             <if test="goodsColor != null">
@@ -116,7 +116,7 @@
         </set>
         where goods_detail_id = #{goodsDeatailId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.adc.eshop.entity.GoodsCategory">
+    <update id="updateByPrimaryKey" parameterType="com.adc.eshop.entity.Category">
     update tb_goods_detail
     set goods_color = #{goodsColor,jdbcType=VARCHAR},
       goods_size = #{goodsSize,jdbcType=INTEGER},

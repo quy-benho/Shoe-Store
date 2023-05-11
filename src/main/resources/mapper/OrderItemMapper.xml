@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adc.eshop.dao.OrderItemMapper">
-    <resultMap id="BaseResultMap" type="com.adc.eshop.entity.OrderItem">
+    <resultMap id="BaseResultMap" type="com.adc.eshop.entity.OrderDetail">
         <id column="order_item_id" jdbcType="BIGINT" property="orderItemId"/>
         <result column="order_id" jdbcType="BIGINT" property="orderId"/>
         <result column="goods_id" jdbcType="BIGINT" property="goodsId"/>
@@ -44,19 +44,19 @@
     delete from tb_order_item
     where order_item_id = #{orderItemId,jdbcType=BIGINT}
   </delete>
-    <insert id="insertBatch" parameterType="com.adc.eshop.entity.OrderItem">
+    <insert id="insertBatch" parameterType="com.adc.eshop.entity.OrderDetail">
         insert into tb_order_item (order_id, goods_id,
         goods_name, goods_cover_img, selling_price,
         goods_count, goods_color, goods_size )
         values
-        <foreach collection="orderItems" item="orderItem" separator=",">
-            (#{orderItem.orderId,jdbcType=BIGINT}, #{orderItem.goodsId,jdbcType=BIGINT},
-            #{orderItem.goodsName,jdbcType=VARCHAR}, #{orderItem.goodsCoverImg,jdbcType=VARCHAR},
-            #{orderItem.sellingPrice,jdbcType=INTEGER},
-            #{orderItem.goodsCount,jdbcType=INTEGER}, #{orderItem.goodsColor,jdbcType=VARCHAR}, #{orderItem.goodsSize,jdbcType=INTEGER})
+        <foreach collection="orderDetails" item="orderDetail" separator=",">
+            (#{orderDetail.orderId,jdbcType=BIGINT}, #{orderDetail.goodsId,jdbcType=BIGINT},
+            #{orderDetail.goodsName,jdbcType=VARCHAR}, #{orderDetail.goodsCoverImg,jdbcType=VARCHAR},
+            #{orderDetail.sellingPrice,jdbcType=INTEGER},
+            #{orderDetail.goodsCount,jdbcType=INTEGER}, #{orderDetail.goodsColor,jdbcType=VARCHAR}, #{orderDetail.goodsSize,jdbcType=INTEGER})
         </foreach>
     </insert>
-    <insert id="insert" parameterType="com.adc.eshop.entity.OrderItem">
+    <insert id="insert" parameterType="com.adc.eshop.entity.OrderDetail">
     insert into tb_order_item (order_item_id, order_id, goods_id,
       goods_name, goods_cover_img, selling_price,
       goods_count, create_time, goods_color, goods_size)
@@ -65,7 +65,7 @@
       #{goodsCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}), #{goodsColor,jdbcType=VARCHAR},
        #{goodsSize,jdbcType=INTEGER}
   </insert>
-    <insert id="insertSelective" parameterType="com.adc.eshop.entity.OrderItem">
+    <insert id="insertSelective" parameterType="com.adc.eshop.entity.OrderDetail">
         insert into tb_order_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="orderItemId != null">
@@ -132,7 +132,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.adc.eshop.entity.OrderItem">
+    <update id="updateByPrimaryKeySelective" parameterType="com.adc.eshop.entity.OrderDetail">
         update tb_order_item
         <set>
             <if test="orderId != null">
@@ -165,7 +165,7 @@
         </set>
         where order_item_id = #{orderItemId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.adc.eshop.entity.OrderItem">
+    <update id="updateByPrimaryKey" parameterType="com.adc.eshop.entity.OrderDetail">
     update tb_order_item
     set order_id = #{orderId,jdbcType=BIGINT},
       goods_id = #{goodsId,jdbcType=BIGINT},

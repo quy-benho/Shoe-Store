@@ -1,6 +1,7 @@
 
 package com.adc.eshop.controller.mall;
 
+import com.adc.eshop.entity.Product;
 import com.adc.eshop.service.GoodsDetailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -14,7 +15,6 @@ import com.adc.eshop.common.Constants;
 import com.adc.eshop.controller.vo.GoodsDetailVO;
 import com.adc.eshop.controller.vo.IndexCategoryVO;
 import com.adc.eshop.controller.vo.SearchPageCategoryVO;
-import com.adc.eshop.entity.Goods;
 import com.adc.eshop.service.CategoryService;
 import com.adc.eshop.service.GoodsService;
 import com.adc.eshop.service.IndexConfigService;
@@ -74,13 +74,13 @@ public class GoodsMallController {
         if (goodsId < 1) {
         	return "pages/detail-not-found";
         }
-        Goods goods = goodsService.getGoodsById(goodsId);
-        if (goods == null || Constants.SELL_STATUS_UP != goods.getGoodsSellStatus()) {
+        Product product = goodsService.getGoodsById(goodsId);
+        if (product == null || Constants.SELL_STATUS_UP != product.getGoodsSellStatus()) {
             return "pages/detail-not-found";
         }
         GoodsDetailVO goodsDetailVO = new GoodsDetailVO();
-        BeanUtil.copyProperties(goods, goodsDetailVO);
-        goodsDetailVO.setGoodsCarouselList(goods.getGoodsCarousel().split(","));
+        BeanUtil.copyProperties(product, goodsDetailVO);
+        goodsDetailVO.setGoodsCarouselList(product.getGoodsCarousel().split(","));
         request.setAttribute("goodsDetail", goodsDetailVO);
         return "pages/detail";
     }

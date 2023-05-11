@@ -1,6 +1,7 @@
 
 package com.adc.eshop.controller.admin;
 
+import com.adc.eshop.entity.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.adc.eshop.common.Constants;
 import com.adc.eshop.common.CategoryLevelEnum;
 import com.adc.eshop.common.ServiceResultEnum;
-import com.adc.eshop.entity.GoodsCategory;
-import com.adc.eshop.entity.Goods;
+import com.adc.eshop.entity.Category;
 import com.adc.eshop.service.CategoryService;
 import com.adc.eshop.service.GoodsService;
 import com.adc.eshop.util.PageQueryUtil;
@@ -43,11 +43,11 @@ public class GoodsController {
     @GetMapping("/goods/add")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
-        List<GoodsCategory> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
+        List<Category> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
         if (!CollectionUtils.isEmpty(firstLevelCategories)) {
-            List<GoodsCategory> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
+            List<Category> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
             if (!CollectionUtils.isEmpty(secondLevelCategories)) {
-                List<GoodsCategory> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_THREE.getLevel());
+                List<Category> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_THREE.getLevel());
                 request.setAttribute("firstLevelCategories", firstLevelCategories);
                 request.setAttribute("secondLevelCategories", secondLevelCategories);
                 request.setAttribute("thirdLevelCategories", thirdLevelCategories);
@@ -62,31 +62,31 @@ public class GoodsController {
     @GetMapping("/goods/edit/{goodsId}")
     public String edit(HttpServletRequest request, @PathVariable("goodsId") Long goodsId) {
         request.setAttribute("path", "edit");
-        Goods goods = goodsService.getGoodsById(goodsId);
-        if (goods == null) {
+        Product product = goodsService.getGoodsById(goodsId);
+        if (product == null) {
             return "error/error_400";
         }
-        if (goods.getGoodsCategoryId() > 0) {
-            if (goods.getGoodsCategoryId() != null || goods.getGoodsCategoryId() > 0) {
-                GoodsCategory currentGoodsCategory = categoryService.getGoodsCategoryById(goods.getGoodsCategoryId());
-                if (currentGoodsCategory != null && currentGoodsCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
-                    List<GoodsCategory> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
-                        List<GoodsCategory> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(currentGoodsCategory.getParentId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
-                        GoodsCategory firstCategory = categoryService.getGoodsCategoryById(currentGoodsCategory.getParentId());
+        if (product.getGoodsCategoryId() > 0) {
+            if (product.getGoodsCategoryId() != null || product.getGoodsCategoryId() > 0) {
+                Category currentCategory = categoryService.getGoodsCategoryById(product.getGoodsCategoryId());
+                if (currentCategory != null && currentCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
+                    List<Category> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
+                        List<Category> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(currentCategory.getParentId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
+                        Category firstCategory = categoryService.getGoodsCategoryById(currentCategory.getParentId());
 
                         if (firstCategory != null) {
                             request.setAttribute("firstLevelCategories", firstLevelCategories);
                             request.setAttribute("secondLevelCategories", secondLevelCategories);
                             request.setAttribute("firstLevelCategoryId", firstCategory.getCategoryId());
-                            request.setAttribute("secondLevelCategoryId", currentGoodsCategory.getCategoryId());
+                            request.setAttribute("secondLevelCategoryId", currentCategory.getCategoryId());
                         }
                 }
             }
         }
-        if (goods.getGoodsCategoryId() == 0) {
-            List<GoodsCategory> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
+        if (product.getGoodsCategoryId() == 0) {
+            List<Category> firstLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), CategoryLevelEnum.LEVEL_ONE.getLevel());
             if (!CollectionUtils.isEmpty(firstLevelCategories)) {
-                List<GoodsCategory> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
+                List<Category> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_TWO.getLevel());
                 if (!CollectionUtils.isEmpty(secondLevelCategories)) {
 //                    List<GoodsCategory> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_THREE.getLevel());
                     request.setAttribute("firstLevelCategories", firstLevelCategories);
@@ -95,7 +95,7 @@ public class GoodsController {
                 }
             }
         }
-        request.setAttribute("goods", goods);
+        request.setAttribute("goods", product);
         request.setAttribute("path", "goods-edit");
         request.setAttribute("pageType", "edit");
         return "admin/goods_edit";
@@ -115,20 +115,20 @@ public class GoodsController {
 
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(@RequestBody Goods goods) {
-        if (StringUtils.isEmpty(goods.getGoodsName())
-                || StringUtils.isEmpty(goods.getGoodsIntro())
-                || StringUtils.isEmpty(goods.getTag())
-                || Objects.isNull(goods.getOriginalPrice())
-                || Objects.isNull(goods.getGoodsCategoryId())
-                || Objects.isNull(goods.getSellingPrice())
-                || Objects.isNull(goods.getStockNum())
-                || Objects.isNull(goods.getGoodsSellStatus())
-                || StringUtils.isEmpty(goods.getGoodsCoverImg())
-                || StringUtils.isEmpty(goods.getGoodsDetailContent())) {
+    public Result save(@RequestBody Product product) {
+        if (StringUtils.isEmpty(product.getGoodsName())
+                || StringUtils.isEmpty(product.getGoodsIntro())
+                || StringUtils.isEmpty(product.getTag())
+                || Objects.isNull(product.getOriginalPrice())
+                || Objects.isNull(product.getGoodsCategoryId())
+                || Objects.isNull(product.getSellingPrice())
+                || Objects.isNull(product.getStockNum())
+                || Objects.isNull(product.getGoodsSellStatus())
+                || StringUtils.isEmpty(product.getGoodsCoverImg())
+                || StringUtils.isEmpty(product.getGoodsDetailContent())) {
             return ResultGenerator.genFailResult("Abnormal paramete！");
         }
-        String result = goodsService.saveGoods(goods);
+        String result = goodsService.saveGoods(product);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -140,21 +140,21 @@ public class GoodsController {
 
     @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
     @ResponseBody
-    public Result update(@RequestBody Goods goods) {
-        if (Objects.isNull(goods.getGoodsId())
-                || StringUtils.isEmpty(goods.getGoodsName())
-                || StringUtils.isEmpty(goods.getGoodsIntro())
-                || StringUtils.isEmpty(goods.getTag())
-                || Objects.isNull(goods.getOriginalPrice())
-                || Objects.isNull(goods.getSellingPrice())
-                || Objects.isNull(goods.getGoodsCategoryId())
-                || Objects.isNull(goods.getStockNum())
-                || Objects.isNull(goods.getGoodsSellStatus())
-                || StringUtils.isEmpty(goods.getGoodsCoverImg())
-                || StringUtils.isEmpty(goods.getGoodsDetailContent())) {
+    public Result update(@RequestBody Product product) {
+        if (Objects.isNull(product.getGoodsId())
+                || StringUtils.isEmpty(product.getGoodsName())
+                || StringUtils.isEmpty(product.getGoodsIntro())
+                || StringUtils.isEmpty(product.getTag())
+                || Objects.isNull(product.getOriginalPrice())
+                || Objects.isNull(product.getSellingPrice())
+                || Objects.isNull(product.getGoodsCategoryId())
+                || Objects.isNull(product.getStockNum())
+                || Objects.isNull(product.getGoodsSellStatus())
+                || StringUtils.isEmpty(product.getGoodsCoverImg())
+                || StringUtils.isEmpty(product.getGoodsDetailContent())) {
             return ResultGenerator.genFailResult("Abnormal paramete！");
         }
-        String result = goodsService.updateGoods(goods);
+        String result = goodsService.updateGoods(product);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -166,11 +166,11 @@ public class GoodsController {
     @GetMapping("/goods/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
-        Goods goods = goodsService.getGoodsById(id);
-        if (goods == null) {
+        Product product = goodsService.getGoodsById(id);
+        if (product == null) {
             return ResultGenerator.genFailResult(ServiceResultEnum.DATA_NOT_EXIST.getResult());
         }
-        return ResultGenerator.genSuccessResult(goods);
+        return ResultGenerator.genSuccessResult(product);
     }
 
 

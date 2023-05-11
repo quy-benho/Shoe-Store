@@ -4,18 +4,18 @@ package com.adc.eshop.controller.vo;
 import java.io.Serializable;
 import java.util.List;
 
-import com.adc.eshop.entity.GoodsCategory;
+import com.adc.eshop.entity.Category;
 
 
 public class SearchPageCategoryVO implements Serializable {
 
     private String firstLevelCategoryName;
 
-    private List<GoodsCategory> secondLevelCategoryList;
+    private List<Category> secondLevelCategoryList;
 
     private String secondLevelCategoryName;
 
-    private List<GoodsCategory> thirdLevelCategoryList;
+    private List<Category> thirdLevelCategoryList;
 
     private String currentCategoryName;
 
@@ -27,11 +27,11 @@ public class SearchPageCategoryVO implements Serializable {
         this.firstLevelCategoryName = firstLevelCategoryName;
     }
 
-    public List<GoodsCategory> getSecondLevelCategoryList() {
+    public List<Category> getSecondLevelCategoryList() {
         return secondLevelCategoryList;
     }
 
-    public void setSecondLevelCategoryList(List<GoodsCategory> secondLevelCategoryList) {
+    public void setSecondLevelCategoryList(List<Category> secondLevelCategoryList) {
         this.secondLevelCategoryList = secondLevelCategoryList;
     }
 
@@ -43,11 +43,11 @@ public class SearchPageCategoryVO implements Serializable {
         this.secondLevelCategoryName = secondLevelCategoryName;
     }
 
-    public List<GoodsCategory> getThirdLevelCategoryList() {
+    public List<Category> getThirdLevelCategoryList() {
         return thirdLevelCategoryList;
     }
 
-    public void setThirdLevelCategoryList(List<GoodsCategory> thirdLevelCategoryList) {
+    public void setThirdLevelCategoryList(List<Category> thirdLevelCategoryList) {
         this.thirdLevelCategoryList = thirdLevelCategoryList;
     }
 

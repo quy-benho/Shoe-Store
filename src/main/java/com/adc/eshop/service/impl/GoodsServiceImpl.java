@@ -1,6 +1,7 @@
 
 package com.adc.eshop.service.impl;
 
+import com.adc.eshop.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -8,7 +9,6 @@ import org.springframework.util.CollectionUtils;
 import com.adc.eshop.common.ServiceResultEnum;
 import com.adc.eshop.controller.vo.SearchGoodsVO;
 import com.adc.eshop.dao.GoodsMapper;
-import com.adc.eshop.entity.Goods;
 import com.adc.eshop.service.GoodsService;
 import com.adc.eshop.util.BeanUtil;
 import com.adc.eshop.util.PageQueryUtil;
@@ -26,42 +26,42 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public PageResult getGoodsPage(PageQueryUtil pageUtil) {
-        List<Goods> goodsList = goodsMapper.findGoodsList(pageUtil);
+        List<Product> productList = goodsMapper.findGoodsList(pageUtil);
         int total = goodsMapper.getTotalGoods(pageUtil);
-        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+        PageResult pageResult = new PageResult(productList, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
 
     @Override
-    public String saveGoods(Goods goods) {
-        if (goodsMapper.insertSelective(goods) > 0) {
+    public String saveGoods(Product product) {
+        if (goodsMapper.insertSelective(product) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
     @Override
-    public void batchSaveGoods(List<Goods> newBeeMallGoodsList) {
-        if (!CollectionUtils.isEmpty(newBeeMallGoodsList)) {
-            goodsMapper.batchInsert(newBeeMallGoodsList);
+    public void batchSaveGoods(List<Product> newBeeMallProductList) {
+        if (!CollectionUtils.isEmpty(newBeeMallProductList)) {
+            goodsMapper.batchInsert(newBeeMallProductList);
         }
     }
 
     @Override
-    public String updateGoods(Goods goods) {
-        Goods temp = goodsMapper.selectByPrimaryKey(goods.getGoodsId());
+    public String updateGoods(Product product) {
+        Product temp = goodsMapper.selectByPrimaryKey(product.getGoodsId());
         if (temp == null) {
             return ServiceResultEnum.DATA_NOT_EXIST.getResult();
         }
-        goods.setUpdateTime(new Date());
-        if (goodsMapper.updateByPrimaryKeySelective(goods) > 0) {
+        product.setUpdateTime(new Date());
+        if (goodsMapper.updateByPrimaryKeySelective(product) > 0) {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
     @Override
-    public Goods getGoodsById(Long id) {
+    public Product getGoodsById(Long id) {
         return goodsMapper.selectByPrimaryKey(id);
     }
     
@@ -72,11 +72,11 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public PageResult searchGoods(PageQueryUtil pageUtil) {
-        List<Goods> goodsList = goodsMapper.findGoodsListBySearch(pageUtil);
+        List<Product> productList = goodsMapper.findGoodsListBySearch(pageUtil);
         int total = goodsMapper.getTotalGoodsBySearch(pageUtil).size();
         List<SearchGoodsVO> newBeeMallSearchGoodsVOS = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(goodsList)) {
-            newBeeMallSearchGoodsVOS = BeanUtil.copyList(goodsList, SearchGoodsVO.class);
+        if (!CollectionUtils.isEmpty(productList)) {
+            newBeeMallSearchGoodsVOS = BeanUtil.copyList(productList, SearchGoodsVO.class);
             for (SearchGoodsVO searchGoodsVO : newBeeMallSearchGoodsVOS) {
                 String goodsName = searchGoodsVO.getGoodsName();
                 String goodsIntro = searchGoodsVO.getGoodsIntro();

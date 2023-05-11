@@ -1,8 +1,8 @@
 package com.adc.eshop.dao;
 
+import com.adc.eshop.entity.Product;
 import org.apache.ibatis.annotations.Param;
 
-import com.adc.eshop.entity.Goods;
 import com.adc.eshop.entity.StockNumDTO;
 import com.adc.eshop.util.PageQueryUtil;
 
@@ -11,29 +11,29 @@ import java.util.List;
 public interface GoodsMapper {
     int deleteByPrimaryKey(Long goodsId);
 
-    int insert(Goods record);
+    int insert(Product record);
 
-    int insertSelective(Goods record);
+    int insertSelective(Product record);
 
-    Goods selectByPrimaryKey(Long goodsId);
+    Product selectByPrimaryKey(Long goodsId);
 
-    int updateByPrimaryKeySelective(Goods record);
+    int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKeyWithBLOBs(Goods record);
+    int updateByPrimaryKeyWithBLOBs(Product record);
 
-    int updateByPrimaryKey(Goods record);
+    int updateByPrimaryKey(Product record);
 
-    List<Goods> findGoodsList(PageQueryUtil pageUtil);
+    List<Product> findGoodsList(PageQueryUtil pageUtil);
 
     int getTotalGoods(PageQueryUtil pageUtil);
 
-    List<Goods> selectByPrimaryKeys(List<Long> goodsIds);
+    List<Product> selectByPrimaryKeys(List<Long> goodsIds);
 
-    List<Goods> findGoodsListBySearch(PageQueryUtil pageUtil);
+    List<Product> findGoodsListBySearch(PageQueryUtil pageUtil);
 
-    List<Goods> getTotalGoodsBySearch(PageQueryUtil pageUtil);
+    List<Product> getTotalGoodsBySearch(PageQueryUtil pageUtil);
 
-    int batchInsert(@Param("GoodsList") List<Goods> newBeeMallGoodsList);
+    int batchInsert(@Param("GoodsList") List<Product> newBeeMallProductList);
 
     int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 

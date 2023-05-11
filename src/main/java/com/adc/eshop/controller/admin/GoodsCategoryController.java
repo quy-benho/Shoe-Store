@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.adc.eshop.common.CategoryLevelEnum;
 import com.adc.eshop.common.ServiceResultEnum;
-import com.adc.eshop.entity.GoodsCategory;
+import com.adc.eshop.entity.Category;
 import com.adc.eshop.service.CategoryService;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.Result;
@@ -53,7 +53,7 @@ public class GoodsCategoryController {
         if (categoryId == null || categoryId < 1) {
             return ResultGenerator.genFailResult("Missing parameters！");
         }
-        GoodsCategory category = categoryService.getGoodsCategoryById(categoryId);
+        Category category = categoryService.getGoodsCategoryById(categoryId);
        
         if (category == null || category.getCategoryLevel() == CategoryLevelEnum.LEVEL_THREE.getLevel()) {
             return ResultGenerator.genFailResult("Abnormal parameter！");
@@ -61,17 +61,17 @@ public class GoodsCategoryController {
         Map categoryResult = new HashMap(2);
         if (category.getCategoryLevel() == CategoryLevelEnum.LEVEL_ONE.getLevel()) {
          
-            List<GoodsCategory> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), CategoryLevelEnum.LEVEL_TWO.getLevel());
+            List<Category> secondLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), CategoryLevelEnum.LEVEL_TWO.getLevel());
             if (!CollectionUtils.isEmpty(secondLevelCategories)) {
     
-                List<GoodsCategory> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_THREE.getLevel());
+                List<Category> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), CategoryLevelEnum.LEVEL_THREE.getLevel());
                 categoryResult.put("secondLevelCategories", secondLevelCategories);
                 categoryResult.put("thirdLevelCategories", thirdLevelCategories);
             }
         }
         if (category.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
 
-            List<GoodsCategory> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), CategoryLevelEnum.LEVEL_THREE.getLevel());
+            List<Category> thirdLevelCategories = categoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), CategoryLevelEnum.LEVEL_THREE.getLevel());
             categoryResult.put("thirdLevelCategories", thirdLevelCategories);
         }
         return ResultGenerator.genSuccessResult(categoryResult);
@@ -79,14 +79,14 @@ public class GoodsCategoryController {
 
     @RequestMapping(value = "/categories/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(@RequestBody GoodsCategory goodsCategory) {
-        if (Objects.isNull(goodsCategory.getCategoryLevel())
-                || StringUtils.isEmpty(goodsCategory.getCategoryName())
-                || Objects.isNull(goodsCategory.getParentId())
-                || Objects.isNull(goodsCategory.getCategoryRank())) {
+    public Result save(@RequestBody Category category) {
+        if (Objects.isNull(category.getCategoryLevel())
+                || StringUtils.isEmpty(category.getCategoryName())
+                || Objects.isNull(category.getParentId())
+                || Objects.isNull(category.getCategoryRank())) {
             return ResultGenerator.genFailResult("Abnormal parameter！");
         }
-        String result = categoryService.saveCategory(goodsCategory);
+        String result = categoryService.saveCategory(category);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -97,15 +97,15 @@ public class GoodsCategoryController {
 
     @RequestMapping(value = "/categories/update", method = RequestMethod.POST)
     @ResponseBody
-    public Result update(@RequestBody GoodsCategory goodsCategory) {
-        if (Objects.isNull(goodsCategory.getCategoryId())
-                || Objects.isNull(goodsCategory.getCategoryLevel())
-                || StringUtils.isEmpty(goodsCategory.getCategoryName())
-                || Objects.isNull(goodsCategory.getParentId())
-                || Objects.isNull(goodsCategory.getCategoryRank())) {
+    public Result update(@RequestBody Category category) {
+        if (Objects.isNull(category.getCategoryId())
+                || Objects.isNull(category.getCategoryLevel())
+                || StringUtils.isEmpty(category.getCategoryName())
+                || Objects.isNull(category.getParentId())
+                || Objects.isNull(category.getCategoryRank())) {
             return ResultGenerator.genFailResult("Abnormal parameter！");
         }
-        String result = categoryService.updateGoodsCategory(goodsCategory);
+        String result = categoryService.updateGoodsCategory(category);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
             return ResultGenerator.genSuccessResult();
         } else {
@@ -117,11 +117,11 @@ public class GoodsCategoryController {
     @GetMapping("/categories/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
-        GoodsCategory goodsCategory = categoryService.getGoodsCategoryById(id);
-        if (goodsCategory == null) {
+        Category category = categoryService.getGoodsCategoryById(id);
+        if (category == null) {
             return ResultGenerator.genFailResult("Abnormal parameter");
         }
-        return ResultGenerator.genSuccessResult(goodsCategory);
+        return ResultGenerator.genSuccessResult(category);
     }
 
 

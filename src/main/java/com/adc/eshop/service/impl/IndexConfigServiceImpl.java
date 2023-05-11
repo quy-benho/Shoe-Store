@@ -10,7 +10,7 @@ import com.adc.eshop.controller.vo.IndexConfigGoodsVO;
 import com.adc.eshop.dao.IndexConfigMapper;
 import com.adc.eshop.dao.GoodsMapper;
 import com.adc.eshop.entity.IndexConfig;
-import com.adc.eshop.entity.Goods;
+import com.adc.eshop.entity.Product;
 import com.adc.eshop.service.IndexConfigService;
 import com.adc.eshop.util.BeanUtil;
 import com.adc.eshop.util.PageQueryUtil;
@@ -68,7 +68,7 @@ public class IndexConfigServiceImpl implements IndexConfigService {
         List<IndexConfig> indexConfigs = indexConfigMapper.findIndexConfigsByTypeAndNum(configType, number);
         if (!CollectionUtils.isEmpty(indexConfigs)) {
             List<Long> goodsIds = indexConfigs.stream().map(IndexConfig::getGoodsId).collect(Collectors.toList());
-            List<Goods> goods = goodsMapper.selectByPrimaryKeys(goodsIds);
+            List<Product> goods = goodsMapper.selectByPrimaryKeys(goodsIds);
             indexConfigGoodsVOS = BeanUtil.copyList(goods, IndexConfigGoodsVO.class);
             for (IndexConfigGoodsVO indexConfigGoodsVO : indexConfigGoodsVOS) {
                 String goodsName = indexConfigGoodsVO.getGoodsName();

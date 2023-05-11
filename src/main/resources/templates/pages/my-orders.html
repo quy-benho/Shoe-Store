@@ -69,19 +69,19 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="order-items">
-                                                        <ul class="goods-list">
+                                                        <ul class="product-list">
                                                             <th:block
                                                                     th:each="item : ${order.OrderItemVOS}">
                                                                 <li>
                                                                     <div class="figure figure-thumb">
                                                                         <a target="_blank"
-                                                                           th:href="@{'/goods/detail/'+${item.goodsId}}">
+                                                                           th:href="@{'/product/detail/'+${item.goodsId}}">
                                                                             <img th:src="@{${item.goodsCoverImg}}"
                                                                                  width="80" height="80" alt="">
                                                                         </a>
                                                                     </div>
                                                                     <p class="name"><a target="_blank"
-                                                                                       th:href="@{'/goods/detail/'+${item.goodsId}}"
+                                                                                       th:href="@{'/product/detail/'+${item.goodsId}}"
                                                                                        th:text="${item.goodsName}">newbee</a>
                                                                     </p>
                                                                     <p class="price"

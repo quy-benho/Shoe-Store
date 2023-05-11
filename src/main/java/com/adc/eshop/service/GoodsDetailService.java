@@ -1,9 +1,6 @@
 package com.adc.eshop.service;
 
-import com.adc.eshop.controller.vo.IndexCategoryVO;
-import com.adc.eshop.controller.vo.SearchPageCategoryVO;
-import com.adc.eshop.entity.GoodsCategory;
-import com.adc.eshop.entity.GoodsDetail;
+import com.adc.eshop.entity.ProductDetail;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.PageResult;
 
@@ -13,15 +10,15 @@ public interface GoodsDetailService {
 
     PageResult getGoodsDetailPage(PageQueryUtil pageUtil);
 
-    String saveGoodsDetail(GoodsDetail goodsDetail);
+    String saveGoodsDetail(ProductDetail productDetail);
 
-    String updateGoodsDetail(GoodsDetail goodsDetail);
+    String updateGoodsDetail(ProductDetail productDetail);
 
     Integer deleteGoodsDetail(Long id);
 
-    GoodsDetail getGoodsDetailById(Long id);
+    ProductDetail getGoodsDetailById(Long id);
 
-    List<GoodsDetail> selectGooDetail(List<Long> parentIds);
+    List<ProductDetail> selectGooDetail(List<Long> parentIds);
 
     List<String> getListColorById(Long goodsId);
 

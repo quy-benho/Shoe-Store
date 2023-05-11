@@ -61,60 +61,60 @@
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <input type="hidden" id="goodsId" name="goodsId"
-                                       th:value="${goods!=null and goods.goodsId!=null }?${goods.goodsId}: 0">
+                                       th:value="${product!=null and product.goodsId!=null }?${product.goodsId}: 0">
                                 <input type="text" class="form-control col-sm-6" id="goodsName" name="goodsName"
                                        placeholder="*Nhập tên sản phẩm (bắt buộc)"
-                                       th:value="${goods!=null and goods.goodsName!=null }?${goods.goodsName}: ''"
+                                       th:value="${product!=null and product.goodsName!=null }?${product.goodsName}: ''"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="text" class="form-control col-sm-6" id="goodsIntro" name="goodsIntro"
                                        placeholder="*Nhập mô tả sản phẩm (trong 100 từ)"
-                                       th:value="${goods!=null and goods.goodsIntro!=null }?${goods.goodsIntro}: ''"
+                                       th:value="${product!=null and product.goodsIntro!=null }?${product.goodsIntro}: ''"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <input type="number" class="form-control col-sm-6" id="originalPrice"
                                        name="originalPrice"
                                        placeholder="*Nhập giá ban đầu"
-                                       th:value="${goods!=null and goods.originalPrice!=null }?${goods.originalPrice}: 1"
+                                       th:value="${product!=null and product.originalPrice!=null }?${product.originalPrice}: 1"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="number" class="form-control col-sm-6" id="sellingPrice"
                                        name="sellingPrice"
                                        placeholder="*Nhập giá bán"
-                                       th:value="${goods!=null and goods.sellingPrice!=null }?${goods.sellingPrice}: 1"
+                                       th:value="${product!=null and product.sellingPrice!=null }?${product.sellingPrice}: 1"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <input type="number" class="form-control col-sm-6" id="stockNum" name="stockNum"
                                        placeholder="*Nhập số lượng sản phẩm"
-                                       th:value="${goods!=null and goods.stockNum!=null }?${goods.stockNum}: 0"
+                                       th:value="${product!=null and product.stockNum!=null }?${product.stockNum}: 0"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="text" class="form-control col-sm-6" id="tag" name="tag"
                                        placeholder="*Nhập thẻ tag"
-                                       th:value="${goods!=null and goods.tag!=null }?${goods.tag}: ''"
+                                       th:value="${product!=null and product.tag!=null }?${product.tag}: ''"
                                        required="true">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Trạng thái:&nbsp;</label>
                                 <input name="goodsSellStatus" type="radio" id="goodsSellStatusTrue" checked=true
-                                       th:checked="${null==goods||(null !=goods and null !=goods.goodsSellStatus and goods.goodsSellStatus==0)} ?true:false"
+                                       th:checked="${null==product||(null !=product and null !=product.goodsSellStatus and product.goodsSellStatus==0)} ?true:false"
                                        value="0"/>&nbsp;
                                        <label for="goodsSellStatusTrue" class="font-weight-normal">Đang bán&nbsp;</label>&nbsp;
                                 <input name="goodsSellStatus" type="radio" id="goodsSellStatusFalse" value="1"
-                                       th:checked="${null !=goods and null !=goods.goodsSellStatus and goods.goodsSellStatus==1} ?true:false"/>&nbsp;
+                                       th:checked="${null !=product and null !=product.goodsSellStatus and product.goodsSellStatus==1} ?true:false"/>&nbsp;
                                        <label for="goodsSellStatusFalse" class="font-weight-normal">Dừng bán&nbsp;</label>
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <div class="col-sm-4">
-                                        <th:block th:if="${null == goods}">
+                                        <th:block th:if="${null == product}">
                                             <img id="goodsCoverImg" src="/admin/dist/img/img-upload.png"
                                                  style="height: 64px;width: 64px;">
                                         </th:block>
-                                        <th:block th:unless="${null == goods}">
-                                            <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
+                                        <th:block th:unless="${null == product}">
+                                            <img id="goodsCoverImg" th:src="${product.goodsCoverImg}"
                                                  style="width:160px ;height: 160px;display:block;">
                                         </th:block>
                                     </div>
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" id="wangEditor" th:utext="${goods!=null and goods.goodsDetailContent !=null}?${goods.goodsDetailContent}: ''">
+                            <div class="form-group" id="wangEditor" th:utext="${product!=null and product.goodsDetailContent !=null}?${product.goodsDetailContent}: ''">
                             </div>
                             <div class="form-group">
                                 <!-- æŒ‰é’® -->

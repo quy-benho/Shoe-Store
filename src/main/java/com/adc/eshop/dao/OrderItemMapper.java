@@ -1,30 +1,29 @@
 package com.adc.eshop.dao;
 
+import com.adc.eshop.entity.OrderDetail;
 import org.apache.ibatis.annotations.Param;
-
-import com.adc.eshop.entity.OrderItem;
 
 import java.util.List;
 
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Long orderItemId);
 
-    int insert(OrderItem record);
+    int insert(OrderDetail record);
 
-    int insertSelective(OrderItem record);
+    int insertSelective(OrderDetail record);
 
-    OrderItem selectByPrimaryKey(Long orderItemId);
-
-
-    List<OrderItem> selectByOrderId(Long orderId);
+    OrderDetail selectByPrimaryKey(Long orderItemId);
 
 
-    List<OrderItem> selectByOrderIds(@Param("orderIds") List<Long> orderIds);
+    List<OrderDetail> selectByOrderId(Long orderId);
 
 
-    int insertBatch(@Param("orderItems") List<OrderItem> orderItems);
+    List<OrderDetail> selectByOrderIds(@Param("orderIds") List<Long> orderIds);
 
-    int updateByPrimaryKeySelective(OrderItem record);
 
-    int updateByPrimaryKey(OrderItem record);
+    int insertBatch(@Param("orderItems") List<OrderDetail> orderDetails);
+
+    int updateByPrimaryKeySelective(OrderDetail record);
+
+    int updateByPrimaryKey(OrderDetail record);
 }

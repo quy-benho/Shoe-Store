@@ -94,7 +94,7 @@
         <th:block th:unless="${#lists.isEmpty(hotGoodses)}">
             <th:block th:each="hotGoodse : ${hotGoodses}">
                 <div class="hot-image">
-                    <a th:href="@{'/goods/detail/'+${hotGoodse.goodsId}}">
+                    <a th:href="@{'/product/detail/'+${hotGoodse.goodsId}}">
                         <img th:src="@{${hotGoodse.goodsCoverImg}}" th:alt="${hotGoodse.goodsName}">
                     </a>
                 </div>
@@ -131,7 +131,7 @@
             <th:block th:unless="${#lists.isEmpty(newGoodses)}">
                 <th:block th:each="newGoods : ${newGoodses}">
                     <li>
-                        <a th:href="@{'/goods/detail/'+${newGoods.goodsId}}">
+                        <a th:href="@{'/product/detail/'+${newGoods.goodsId}}">
                             <img th:src="@{${newGoods.goodsCoverImg}}" th:alt="${newGoods.goodsName}">
                             <p class="name" th:text="${newGoods.goodsName}">NewBeeAppdata</p>
                             <p class="discount" th:text="${newGoods.goodsIntro}">NewBeeAppdata</p>
@@ -192,7 +192,7 @@
             <th:block th:unless="${#lists.isEmpty(recommendGoodses)}">
                 <th:block th:each="recommendGoods : ${recommendGoodses}">
                     <li>
-                        <a th:href="@{'/goods/detail/'+${recommendGoods.goodsId}}">
+                        <a th:href="@{'/product/detail/'+${recommendGoods.goodsId}}">
 
                             <img th:src="@{${recommendGoods.goodsCoverImg}}" th:alt="${recommendGoods.goodsName}">
                             <p class="name" th:text="${recommendGoods.goodsName}">Tên</p>

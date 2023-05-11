@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.adc.eshop.common.IndexConfigTypeEnum;
 import com.adc.eshop.common.ServiceResultEnum;
-import com.adc.eshop.entity.GoodsCategory;
 import com.adc.eshop.entity.IndexConfig;
-import com.adc.eshop.service.CategoryService;
 import com.adc.eshop.service.IndexConfigService;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.Result;

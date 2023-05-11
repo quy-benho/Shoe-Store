@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.adc.eshop.controller.vo.IndexCategoryVO;
 import com.adc.eshop.controller.vo.SearchPageCategoryVO;
-import com.adc.eshop.entity.GoodsCategory;
+import com.adc.eshop.entity.Category;
 import com.adc.eshop.util.PageQueryUtil;
 import com.adc.eshop.util.PageResult;
 
@@ -13,11 +13,11 @@ public interface CategoryService {
     
     PageResult getCategorisPage(PageQueryUtil pageUtil);
 
-    String saveCategory(GoodsCategory goodsCategory);
+    String saveCategory(Category category);
 
-    String updateGoodsCategory(GoodsCategory goodsCategory);
+    String updateGoodsCategory(Category category);
 
-    GoodsCategory getGoodsCategoryById(Long id);
+    Category getGoodsCategoryById(Long id);
 
     Boolean deleteBatch(Integer[] ids);
 
@@ -28,5 +28,5 @@ public interface CategoryService {
     SearchPageCategoryVO getCategoriesForSearch(Long categoryId);
 
     
-    List<GoodsCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel);
+    List<Category> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel);
 }

@@ -116,17 +116,17 @@
 	            <img style="margin-top: 16px;padding: 16px 20px;" th:src="@{/Appdata/image/null-content.png}">
 	        </th:block>
 	        <th:block th:unless="${#lists.isEmpty(pageResult.list)}">
-		         <div th:each="goods : ${pageResult.list}" class="item_card_frame" style="width: 24%;">
+		         <div th:each="product : ${pageResult.list}" class="item_card_frame" style="width: 24%;">
 		             <div class="item_card">
-		             	<a th:href="@{'/goods/detail/'+${goods.goodsId}}" target="_blank">
-		             		<img th:src="@{${goods.goodsCoverImg}}" th:alt="${goods.goodsName}">
+		             	<a th:href="@{'/product/detail/'+${product.goodsId}}" target="_blank">
+		             		<img th:src="@{${product.goodsCoverImg}}" th:alt="${product.goodsName}">
 		             	</a>
 		             </div>
 		             <div class="item_brand">
-		             	<a th:href="@{'/goods/detail/'+${goods.goodsId}}" th:text="${goods.goodsName}" target="_blank"></a>
+		             	<a th:href="@{'/product/detail/'+${product.goodsId}}" th:text="${product.goodsName}" target="_blank"></a>
 		             </div>
-		             <div class="item_sub_intro" th:text="${goods.goodsIntro}"></div>
-		             <div class="item_price" th:text="${goods.formatPrice()}"></div>
+		             <div class="item_sub_intro" th:text="${product.goodsIntro}"></div>
+		             <div class="item_price" th:text="${product.formatPrice()}"></div>
 		         </div>
 	        </th:block>
 		</div>

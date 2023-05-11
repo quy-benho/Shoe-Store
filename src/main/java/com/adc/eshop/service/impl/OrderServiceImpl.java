@@ -1,6 +1,8 @@
 
 package com.adc.eshop.service.impl;
 
+import com.adc.eshop.entity.OrderDetail;
+import com.adc.eshop.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +16,7 @@ import com.adc.eshop.dao.GoodsMapper;
 import com.adc.eshop.dao.OrderItemMapper;
 import com.adc.eshop.dao.OrderMapper;
 import com.adc.eshop.dao.ShoppingCartItemMapper;
-import com.adc.eshop.entity.Goods;
 import com.adc.eshop.entity.Order;
-import com.adc.eshop.entity.OrderItem;
 import com.adc.eshop.entity.StockNumDTO;
 import com.adc.eshop.service.OrderService;
 import com.adc.eshop.util.BeanUtil;
@@ -187,16 +187,16 @@ public class OrderServiceImpl implements OrderService {
     public String saveOrder(UserVO user, List<ShoppingCartItemVO> myShoppingCartItems) {
         List<Long> itemIdList = myShoppingCartItems.stream().map(ShoppingCartItemVO::getCartItemId).collect(Collectors.toList());
         List<Long> goodsIds = myShoppingCartItems.stream().map(ShoppingCartItemVO::getGoodsId).collect(Collectors.toList());
-        List<Goods> goods = goodsMapper.selectByPrimaryKeys(goodsIds);
+        List<Product> goods = goodsMapper.selectByPrimaryKeys(goodsIds);
         
-        List<Goods> goodsListNotSelling = goods.stream()
+        List<Product> productListNotSelling = goods.stream()
                 .filter(goodsTemp -> goodsTemp.getGoodsSellStatus() != Constants.SELL_STATUS_UP)
                 .collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(goodsListNotSelling)) {
+        if (!CollectionUtils.isEmpty(productListNotSelling)) {
             
-            Exception.fail(goodsListNotSelling.get(0).getGoodsName() + "Not available, cannot create an order");
+            Exception.fail(productListNotSelling.get(0).getGoodsName() + "Not available, cannot create an order");
         }
-        Map<Long, Goods> goodsMap = goods.stream().collect(Collectors.toMap(Goods::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
+        Map<Long, Product> goodsMap = goods.stream().collect(Collectors.toMap(Product::getGoodsId, Function.identity(), (entity1, entity2) -> entity1));
         
         for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems) {
             
@@ -240,17 +240,17 @@ public class OrderServiceImpl implements OrderService {
                 
                 if (orderMapper.insertSelective(order) > 0) {
                     
-                    List<OrderItem> orderItems = new ArrayList<>();
+                    List<OrderDetail> orderDetails = new ArrayList<>();
                     for (ShoppingCartItemVO shoppingCartItemVO : myShoppingCartItems) {
-                        OrderItem orderItem = new OrderItem();
+                        OrderDetail orderDetail = new OrderDetail();
                         
-                        BeanUtil.copyProperties(shoppingCartItemVO, orderItem);
+                        BeanUtil.copyProperties(shoppingCartItemVO, orderDetail);
                         
-                        orderItem.setOrderId(order.getOrderId());
-                        orderItems.add(orderItem);
+                        orderDetail.setOrderId(order.getOrderId());
+                        orderDetails.add(orderDetail);
                     }
                     
-                    if (orderItemMapper.insertBatch(orderItems) > 0) {
+                    if (orderItemMapper.insertBatch(orderDetails) > 0) {
                         
                         return orderNo;
                     }
@@ -269,10 +269,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.selectByOrderNo(orderNo);
         if (order != null) {
             
-            List<OrderItem> orderItems = orderItemMapper.selectByOrderId(order.getOrderId());
+            List<OrderDetail> orderDetails = orderItemMapper.selectByOrderId(order.getOrderId());
             
-            if (!CollectionUtils.isEmpty(orderItems)) {
-                List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderItems, OrderItemVO.class);
+            if (!CollectionUtils.isEmpty(orderDetails)) {
+                List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderDetails, OrderItemVO.class);
                 OrderDetailVO orderDetailVO = new OrderDetailVO();
                 BeanUtil.copyProperties(order, orderDetailVO);
                 orderDetailVO.setOrderStatusString(OrderStatusEnum.getOrderStatusEnumByStatus(orderDetailVO.getOrderStatus()).getName());
@@ -303,14 +303,14 @@ public class OrderServiceImpl implements OrderService {
             }
             List<Long> orderIds = orders.stream().map(Order::getOrderId).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(orderIds)) {
-                List<OrderItem> orderItems = orderItemMapper.selectByOrderIds(orderIds);
-                Map<Long, List<OrderItem>> itemByOrderIdMap = orderItems.stream().collect(groupingBy(OrderItem::getOrderId));
+                List<OrderDetail> orderDetails = orderItemMapper.selectByOrderIds(orderIds);
+                Map<Long, List<OrderDetail>> itemByOrderIdMap = orderDetails.stream().collect(groupingBy(OrderDetail::getOrderId));
                 for (OrderListVO orderListVO : orderListVOS) {
                     
                     if (itemByOrderIdMap.containsKey(orderListVO.getOrderId())) {
-                        List<OrderItem> orderItemListTemp = itemByOrderIdMap.get(orderListVO.getOrderId());
+                        List<OrderDetail> orderDetailListTemp = itemByOrderIdMap.get(orderListVO.getOrderId());
                         
-                        List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderItemListTemp, OrderItemVO.class);
+                        List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderDetailListTemp, OrderItemVO.class);
                         orderListVO.setOrderItemVOS(orderItemVOS);
                     }
                 }
@@ -378,10 +378,10 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderItemVO> getOrderItems(Long id) {
         Order order = orderMapper.selectByPrimaryKey(id);
         if (order != null) {
-            List<OrderItem> orderItems = orderItemMapper.selectByOrderId(order.getOrderId());
+            List<OrderDetail> orderDetails = orderItemMapper.selectByOrderId(order.getOrderId());
             
-            if (!CollectionUtils.isEmpty(orderItems)) {
-                List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderItems, OrderItemVO.class);
+            if (!CollectionUtils.isEmpty(orderDetails)) {
+                List<OrderItemVO> orderItemVOS = BeanUtil.copyList(orderDetails, OrderItemVO.class);
                 return orderItemVOS;
             }
         }

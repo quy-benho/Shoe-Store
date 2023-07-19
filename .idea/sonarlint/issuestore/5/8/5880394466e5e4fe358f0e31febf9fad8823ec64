@@ -1,0 +1,64 @@
+
+t
+java:S2293E"YReplace the type specification in this constructor call with the diamond operator ("<>").(íÛïõøÿÿÿÿ
+a
+java:S1192"FDefine a constant instead of duplicating this literal "UTF-8" 3 times.(šìì½şÿÿÿÿ
+l
+java:S1104"VMake vnp_PayUrl a static final constant or non-public and provide accessors if needed.(ó’¿ø
+o
+java:S1104"YMake vnp_Returnurl a static final constant or non-public and provide accessors if needed.(Ôƒè 
+l
+java:S1104"WMake vnp_TmnCode a static final constant or non-public and provide accessors if needed.(™›èp
+p
+java:S1104"ZMake vnp_HashSecret a static final constant or non-public and provide accessors if needed.(ô…Ô
+q
+java:S1104"VMake vnp_apiUrl a static final constant or non-public and provide accessors if needed.(äç…±ÿÿÿÿÿ
+j
+java:S1104"TMake vnp_demo a static final constant or non-public and provide accessors if needed.(ÖŠä
+h
+java:S1104"RMake vnp_cn a static final constant or non-public and provide accessors if needed.(‚Í¼ê
+F
+java:S1444"0Make this "public static vnp_PayUrl" field final(ó’¿ø
+I
+java:S1444"3Make this "public static vnp_Returnurl" field final(Ôƒè 
+F
+java:S1444"1Make this "public static vnp_TmnCode" field final(™›èp
+J
+java:S1444"4Make this "public static vnp_HashSecret" field final(ô…Ô
+K
+java:S1444"0Make this "public static vnp_apiUrl" field final(äç…±ÿÿÿÿÿ
+D
+java:S1444".Make this "public static vnp_demo" field final(ÖŠä
+B
+java:S1444",Make this "public static vnp_cn" field final(‚Í¼ê
+k
+java:S3008"URename this field "vnp_PayUrl" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó’¿ø
+n
+java:S3008"XRename this field "vnp_Returnurl" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ôƒè 
+k
+java:S3008"VRename this field "vnp_TmnCode" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™›èp
+o
+java:S3008"YRename this field "vnp_HashSecret" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô…Ô
+p
+java:S3008"URename this field "vnp_apiUrl" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äç…±ÿÿÿÿÿ
+i
+java:S3008"SRename this field "vnp_demo" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖŠä
+g
+java:S3008"QRename this field "vnp_cn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Í¼ê
+U
+java:S1118":Add a private constructor to hide the implicit public one.(€…ßùüÿÿÿÿ
+Z
+java:S2147&"DCombine this catch with the one at line 36, which has the same body.(¤·¿Ã
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(šìì½şÿÿÿÿ
+h	java:S100,"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢í¬Åşÿÿÿÿ
+Z
+java:S2147<"DCombine this catch with the one at line 58, which has the same body.(¤·¿Ã
+T
+java:S47190"9Replace charset name argument with StandardCharsets.UTF_8(šìì½şÿÿÿÿ
+D
+java:S1905L")Remove this unnecessary cast to "String".(ÿ§ÚÄÿÿÿÿÿ
+D
+java:S1905M")Remove this unnecessary cast to "String".(°çóÖşÿÿÿÿ
+4
+java:S2119h"Save and re-use this "Random".(–áÍÈ

@@ -1,0 +1,33 @@
+
+E
+java:S3740k"/Provide the parametrized type for this generic.(ÁåÂ¥
+E
+java:S3740v"/Provide the parametrized type for this generic.(£·ŞŒ
+F
+java:S3740"/Provide the parametrized type for this generic.(«¹İğ
+F
+java:S3740¨"/Provide the parametrized type for this generic.(°”ï
+K
+java:S3740³"/Provide the parametrized type for this generic.(¶‡¸ıÿÿÿÿ
+k
+java:S1192m"UDefine a constant instead of duplicating this literal "Abnormal parameteï¼" 4 times.(ïÍ™÷
+q
+java:S11924"VDefine a constant instead of duplicating this literal "secondLevelCategories" 3 times.(âà¾Æùÿÿÿÿ
+k
+java:S11923"UDefine a constant instead of duplicating this literal "firstLevelCategories" 3 times.(úĞ¼Î
+E
+java:S1066F"/Merge this if statement with the enclosing one.(éÖœ
+D
+java:S5411º"(Use a primitive boolean expression here.(”·€¿úÿÿÿÿ
+h
+java:S3776?"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.( Ñ£
+P	java:S125["<This block of commented-out lines of code should be removed.(ŠÍÃF
+V	java:S125^"<This block of commented-out lines of code should be removed.(‡¹¨üÿÿÿÿ
+^
+java:S4488i"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ªõ‡¤
+e
+java:S4488t"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(„ïİ¥üÿÿÿÿ
+f
+java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(óû²ÿøÿÿÿÿ
+_
+java:S4488±"HReplace "@RequestMapping(method = RequestMethod.PUT)" with "@PutMapping"(­Êî
